@@ -1,5 +1,6 @@
 package com.example.practicaparcialappmoviles
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -64,9 +66,14 @@ fun ListaDeNotasView(
             contentPadding = PaddingValues(15.dp)
         ) {
             items(listaNotas) { nota ->
-                Card(
+                ElevatedCard(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .clickable(
+                            onClick = {
+                                navController.navigate("detalle/${nota.id}")
+                            }
+                        )
                 ) {
                     Column(
                         verticalArrangement = Arrangement.spacedBy(15.dp)
@@ -91,7 +98,6 @@ fun ListaDeNotasView(
             }
         }
     }
-
 }
 
 @Preview(showBackground = true)

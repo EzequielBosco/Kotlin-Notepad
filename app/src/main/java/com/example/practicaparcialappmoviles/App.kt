@@ -32,7 +32,7 @@ import com.example.practicaparcialappmoviles.ui.theme.PracticaParcialAppMovilesT
 @Composable
 fun App(navController: NavController,
         modifier: Modifier = Modifier,
-        onNuevaNota: (Nota) -> Unit
+        onNuevaNota: (String, String) -> Unit
 ) {
     Scaffold(
         modifier = modifier,
@@ -84,7 +84,7 @@ fun App(navController: NavController,
                 onClick = {
                     navController.popBackStack()
                     onNuevaNota(
-                        Nota(titulo = titulo, texto = texto)
+                        titulo, texto
                     )
                 },
                 modifier = Modifier.align(Alignment.End)
@@ -101,8 +101,9 @@ fun AppPreview() {
     PracticaParcialAppMovilesTheme {
         App(
             rememberNavController(),
-            onNuevaNota = { nota ->
-                println("Nota creada") }
+            onNuevaNota = {titulo, texto -> }
+            //onNuevaNota = { nota ->
+                //println("Nota creada") }
         )
     }
 }
