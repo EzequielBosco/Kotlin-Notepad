@@ -25,11 +25,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.practicaparcialappmoviles.Nota
 import com.example.practicaparcialappmoviles.ui.theme.PracticaParcialAppMovilesTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun App(navController: NavController, name: String, modifier: Modifier = Modifier) {
+fun App(navController: NavController,
+        modifier: Modifier = Modifier,
+        onNuevaNota: (Nota) -> Unit
+) {
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -51,7 +55,7 @@ fun App(navController: NavController, name: String, modifier: Modifier = Modifie
             var titulo by remember { mutableStateOf("") }
             var texto by remember { mutableStateOf("") }
 
-            Text(name)
+            Text("Nueva Nota")
 
             TextField(
                 modifier = Modifier.weight(1f).fillMaxWidth(),
@@ -78,7 +82,10 @@ fun App(navController: NavController, name: String, modifier: Modifier = Modifie
 
             Button(
                 onClick = {
-                navController.popBackStack()
+                    navController.popBackStack()
+                    onNuevaNota(
+                        Nota(titulo = titulo, texto = texto)
+                    )
                 },
                 modifier = Modifier.align(Alignment.End)
             ) {
@@ -94,7 +101,8 @@ fun AppPreview() {
     PracticaParcialAppMovilesTheme {
         App(
             rememberNavController(),
-            "Prueba App"
+            onNuevaNota = { nota ->
+                println("Nota creada") }
         )
     }
 }
